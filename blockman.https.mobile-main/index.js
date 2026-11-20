@@ -67,6 +67,20 @@ app.all('/', (req, res) => {
   res.status(200).send('Hello World');
 });
 
+// COMODIN: rutas que el cliente 1.15.2 pide y el servidor aun no tiene.
+// Responde "SUCCESS" con datos vacios para que el juego no reciba 404.
+app.use((req, res) => {
+  console.log('STUB:', req.method, req.originalUrl);
+  const p = req.path;
+  const isList =
+    /list|recently|follow|recommend|decorations|friends|users\/\d+\/type/.test(p);
+  res.status(200).json({
+    code: 1,
+    message: 'SUCCESS',
+    data: isList ? [] : {},
+  });
+});
+
 app.listen(port, () => {
   console.log(`Success your server is available at http://localhost:${port}`);
 });
