@@ -175,7 +175,16 @@ router.post('/api/v1/app/login', async (req, res) => {
             return res.status(400).json({ code: 6, message: 'Bad request : Params error please fill them', data: null });
         }
 
-        const user = await User.findOne({ userId: uid });
+        let user = await User.findOne({ userId: uid });
+
+        // Si no está en la base, mirar account.json y crearlo
+        if (!user) {
+            const acc = Object.values(accountJson).find(a => a.userId === uid);
+            if (acc) {
+                user = new User({ userId: acc.userId, password: acc.password });
+                await user.save();
+            }
+        }
 
         if (!user) {
             return res.status(200).json({
