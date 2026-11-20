@@ -16,7 +16,7 @@ const databaseConfig = require('./config/database');
 const app = express();
 const port = 3000;
 
-mongoose.connect(databaseConfig.databaseUrl)
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log(`The connection to database ${databaseConfig.databaseType} is made and working`);
   })
