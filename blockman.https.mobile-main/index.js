@@ -46,6 +46,42 @@ function connectDB() {
 
 app.use(express.json());
 
+// ---------------------------------------------------------------
+// RESPUESTAS FIJAS con el tipo EXACTO que espera el cliente 1.15.2
+// (van antes del middleware de MongoDB: no dependen de la base)
+// ---------------------------------------------------------------
+const ok = (data) => (req, res) =>
+  res.status(200).json({ code: 1, message: 'SUCCESS', data });
+const page = { pageNo: 0, pageSize: 20, totalPage: 0, totalSize: 0, data: [] };
+
+// Boolean
+app.get('/mailbox/api/v1/mail/new', ok(false));
+app.get('/shop/api/v1/new/shop/user/gift/suit/receive', ok(false));
+app.get('/user/api/v1/users/prefect/info/reward/check/:userId', ok(false));
+app.get('/pay/api/v1/pay/payssion/flag', ok(false));
+app.get('/pay/api/v1/pay/third/part', ok(false));
+
+// String / Integer
+app.get('/clan/api/v1/clan/tribe/id', ok(''));
+app.get('/user/api/v1/users/device/token', ok('token'));
+app.get('/activity/api/v1/collect/exchange/card/combine', ok(0));
+
+// Map y objetos
+app.get('/game/api/v1/games/update/list/:userId', ok({}));
+app.get('/decoration/api/v1/new/decorations/check/resource', ok({}));
+
+// PageData (objeto paginado)
+app.get('/friend/api/v1/friends/follow', ok(page));
+app.get('/msg/api/v1/msg/group/chat/list', ok(page));
+app.get('/game/api/v1/game/revision/list/more', ok(page));
+app.get('/game/api/v1/game/revision/list/by/condition', ok(page));
+
+// List<Game> (vacías por ahora; los minijuegos van después)
+app.get('/game/api/v1/game/revision/list/recommend', ok([]));
+app.get('/game/api/v1/games/playlist/recently', ok([]));
+
+// ---------------------------------------------------------------
+
 app.use(async (req, res, next) => {
   try {
     await connectDB();
