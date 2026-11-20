@@ -53,6 +53,24 @@ router.post('/api/v1/app/renew', async (req, res) => {
     res.status(200).json({ code: 1, message: 'SUCCESS', data: { userId, accessToken: 'Not implemented' } });
 });
 
+// NUEVA: el cliente 1.15.2 la pide al arrancar (antes daba 404)
+router.get('/api/v1/app/auth-token', (req, res) => {
+    res.status(200).json({
+        code: 1,
+        message: 'SUCCESS',
+        data: { accessToken: 'Not implemented' }
+    });
+});
+
+// NUEVA: el cliente 1.15.2 la pide al arrancar (antes daba 404)
+router.post('/api/v1/user/mac/id', (req, res) => {
+    res.status(200).json({
+        code: 1,
+        message: 'SUCCESS',
+        data: {}
+    });
+});
+
 router.post('/api/v1/user/register', async (req, res) => {
     const { nickName, sex } = req.body;
     const userId = req.headers.userid;
