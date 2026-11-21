@@ -1,63 +1,937 @@
-{
-  "g1001": "maps/g1001/m1001_1",
-  "g1002": "maps/g1002/m1002_1",
-  "g1003": "maps/g1003/m301",
-  "g1007": "maps/g1007/m701",
-  "g1008": "maps/g1008/m1008_2",
-  "g1009": "maps/g1009/m901",
-  "g1010": "maps/g1010/m1001",
-  "g1011": "maps/g1011/m1101",
-  "g1012": "maps/g1012/m1201_1",
-  "g1013": "maps/g1013/m1301",
-  "g1014": "maps/g1014/m1401",
-  "g1015": "maps/g1015/m1501_1",
-  "g1016": "maps/g1016/m1601",
-  "g1017": "maps/g1017/m1701",
-  "g1018": "maps/g1018/m1018_1",
-  "g1019": "maps/g1019/m1019_1",
-  "g1020": "maps/g1020/m1020_1",
-  "g1021": "maps/g1021/m1021_1",
-  "g1022": "maps/g1022/m1022_1",
-  "g1023": "maps/g1023/m1023_1",
-  "g1024": "maps/g1024/m1024_1",
-  "g1025": "maps/g1025/m1025_1",
-  "g1026": "maps/g1026/m1026_1",
-  "g1027": "maps/g1027/m1027_1",
-  "g1028": "maps/g1028/m1028_2",
-  "g1029": "maps/g1029/m1029_1",
-  "g1030": "maps/g1030/m1030_1",
-  "g1031": "maps/g1031/m1031_1",
-  "g1032": "maps/g1032/m1032_1",
-  "g1033": "maps/g1033/m1033_2",
-  "g1036": "maps/g1036/m1036_1",
-  "g1037": "maps/g1037/m1037_1",
-  "g1038": "maps/g1038/m1038_1",
-  "g1039": "maps/g1039/m1039_1",
-  "g1041": "maps/g1041/m1041_2",
-  "g1042": "maps/g1042/m1042_1",
-  "g1043": "maps/g1043/m1043_1",
-  "g1044": "maps/g1044/m1044_1",
-  "g1045": "maps/g1045/m1045_1",
-  "g1046": "maps/g1046/m1046_2",
-  "g1047": "maps/g1047/m1047_1",
-  "g1048": "maps/g1048/m1048_1",
-  "g1049": "maps/g1049/m1049_2",
-  "g1050": "maps/g1050/m1050_1",
-  "g1051": "maps/g1051/m1051_1",
-  "g1052": "maps/g1052/m1052_2",
-  "g1053": "maps/g1053/m1053_1",
-  "g1054": "maps/g1054/m1054_1",
-  "g1055": "maps/g1055/m1055_1",
-  "g1056": "maps/g1056/m1056_1",
-  "g1057": "maps/g1057/m1057_1",
-  "g1058": "maps/g1058/m1058_1",
-  "g1060": "maps/g1060/m1060_1",
-  "g1061": "maps/g1061/m1061_1",
-  "g1062": "maps/g1062/m1062_1",
-  "g3042": "maps/g3042/",
-  "g3043": "maps/g3043/",
-  "g3044": "maps/g3044/",
-  "g3045": "maps/g3045/",
-  "g9999": "maps/template",
-  "g9998": "maps/template"
-}
+[
+  {
+    "gameId": "g1001",
+    "gameName": "HungryGame",
+    "gameTitle": "Survival Games",
+    "gameCoverPic": "/static/games-images/survival_games_cover.png",
+    "typeId": 1001,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1002",
+    "gameName": "SkyWar",
+    "gameTitle": "Sky Wars",
+    "gameCoverPic": "/static/games-images/skywar_cover.png",
+    "typeId": 1002,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1003",
+    "gameName": "TeamHungryGame",
+    "gameTitle": "TeamHungryGame",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1003,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1007",
+    "gameName": "BowSpleef",
+    "gameTitle": "Bow Spleef",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1007,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1008",
+    "gameName": "BedWar",
+    "gameTitle": "Bed Wars",
+    "gameCoverPic": "https://cdn.discordapp.com/emojis/1294625024795480157.png?v=1",
+    "typeId": 1008,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1009",
+    "gameName": "MurderMystery",
+    "gameTitle": "Murder Mystery",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1009,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1010",
+    "gameName": "TNTRun",
+    "gameTitle": "TNT Run",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1010,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1011",
+    "gameName": "SnowballBattle",
+    "gameTitle": "Snowball Battle",
+    "gameCoverPic": "/static/games-images/snowball_battle_cover.png",
+    "typeId": 1011,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1012",
+    "gameName": "SnowBattle",
+    "gameTitle": "SnowBattle",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1012,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1013",
+    "gameName": "ZombieInfecting",
+    "gameTitle": "Zombie Infecting",
+    "gameCoverPic": "/static/games-images/zombie_infecting_cover.png",
+    "typeId": 1013,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1014",
+    "gameName": "JailBreak",
+    "gameTitle": "Jail Break",
+    "gameCoverPic": "/static/games-images/jailbreak_cover.png",
+    "typeId": 1014,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1015",
+    "gameName": "SandDigger",
+    "gameTitle": "Treasure Hunter",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1015,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1016",
+    "gameName": "Chicken",
+    "gameTitle": "PUBG:Battle Field",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1016,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1017",
+    "gameName": "HideAndSeek",
+    "gameTitle": "Hide and Seek",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1017,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1018",
+    "gameName": "EggWar",
+    "gameTitle": "Egg War",
+    "gameCoverPic": "/static/games-images/eggwar_cover.png",
+    "typeId": 1018,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1019",
+    "gameName": "CreepyAliens",
+    "gameTitle": "Aliens Attack",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1019,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1020",
+    "gameName": "TinyTown",
+    "gameTitle": "Mini Town",
+    "gameCoverPic": "/static/games-images/minitown_cover.png",
+    "typeId": 1020,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1021",
+    "gameName": "Parkour",
+    "gameTitle": "Rainbow Parkour",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1021,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1022",
+    "gameName": "FlagWar",
+    "gameTitle": "Capture Flag",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1022,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1023",
+    "gameName": "BuildBattle",
+    "gameTitle": "Build Battle",
+    "gameCoverPic": "/static/games-images/build_battle_cover.png",
+    "typeId": 1023,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1024",
+    "gameName": "JewelKnight",
+    "gameTitle": "Gem Knight",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1024,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1025",
+    "gameName": "Tycoon",
+    "gameTitle": "Hero Tycoon 2",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1025,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1026",
+    "gameName": "ThrowPot",
+    "gameTitle": "TNT Tag",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1026,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1027",
+    "gameName": "SkyRoyale",
+    "gameTitle": "Sky Royale",
+    "gameCoverPic": "/static/games-images/sky_royale_cover.png",
+    "typeId": 1027,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1028",
+    "gameName": "Budokai",
+    "gameTitle": "Ultimate Fighting",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1028,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1029",
+    "gameName": "SuperWall",
+    "gameTitle": "Mega Walls",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1029,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1030",
+    "gameName": "SnowmanBattle",
+    "gameTitle": "Snowman Defender",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1030,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1031",
+    "gameName": "Ranchers",
+    "gameTitle": "Ranchers",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1031,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1032",
+    "gameName": "GunBattleHall",
+    "gameTitle": "Blockman Strike",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1032,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1033",
+    "gameName": "GBStrike",
+    "gameTitle": "GBStrike",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1033,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1036",
+    "gameName": "WatchCar",
+    "gameTitle": "Ender vs Slender",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1036,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1037",
+    "gameName": "HASHall",
+    "gameTitle": "Hide And Seek 2",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1037,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1038",
+    "gameName": "HASHidden",
+    "gameTitle": "HASHidden",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1038,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1039",
+    "gameName": "HASChase",
+    "gameTitle": "HASChase",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1039,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1041",
+    "gameName": "BirdSimulator",
+    "gameTitle": "Bird Simulator",
+    "gameCoverPic": "/static/games-images/bird_simulator_cover.png",
+    "typeId": 1041,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1042",
+    "gameName": "PixelGunHall",
+    "gameTitle": "Build and Shoot",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1042,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1043",
+    "gameName": "PixelGunGame",
+    "gameTitle": "PixelGunGame",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1043,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1044",
+    "gameName": "PixelGunGame",
+    "gameTitle": "PixelGunGame",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1044,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1045",
+    "gameName": "PixelGunGame",
+    "gameTitle": "PixelGunGame",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1045,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1046",
+    "gameName": "BedWar",
+    "gameTitle": "BedWar",
+    "gameCoverPic": "https://cdn.discordapp.com/emojis/1294625024795480157.png?v=1",
+    "typeId": 1046,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1047",
+    "gameName": "BlockCity",
+    "gameTitle": "Realm City",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1047,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1048",
+    "gameName": "SkyBlock",
+    "gameTitle": "Sky Block",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1048,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1049",
+    "gameName": "SkyBlockMiningArea",
+    "gameTitle": "SkyBlockMiningArea",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1049,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1050",
+    "gameName": "SkyBlockProduct",
+    "gameTitle": "SkyBlockProduct",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1050,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1051",
+    "gameName": "WalkingDead",
+    "gameTitle": "The Walking Dead",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1051,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1052",
+    "gameName": "BlockFort",
+    "gameTitle": "BlockFort",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1052,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1053",
+    "gameName": "PixelGunGame",
+    "gameTitle": "Battle Royale",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1053,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1054",
+    "gameName": "SkyWarLuckyBlock",
+    "gameTitle": "Lucky Block: Skywars",
+    "gameCoverPic": "/static/games-images/lucky_skywar_cover.png",
+    "typeId": 1054,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1055",
+    "gameName": "LiftingSimulator",
+    "gameTitle": "WWE School Simulator",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1055,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1056",
+    "gameName": "TowerDefense",
+    "gameTitle": "TowerDefense",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1056,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1057",
+    "gameName": "TowerDefenseHall",
+    "gameTitle": "TD: Angry Pets",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1057,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1058",
+    "gameName": "SkyWarLuckyBlockHall",
+    "gameTitle": "SkyWarLuckyBlockHall",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1058,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1060",
+    "gameName": "LSChampionShip",
+    "gameTitle": "LSChampionShip",
+    "gameCoverPic": "/static/games-images/placeholder.png",
+    "typeId": 1060,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1061",
+    "gameName": "BedWar",
+    "gameTitle": "BedWar",
+    "gameCoverPic": "https://cdn.discordapp.com/emojis/1294625024795480157.png?v=1",
+    "typeId": 1061,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  },
+  {
+    "gameId": "g1062",
+    "gameName": "BedWar",
+    "gameTitle": "BedWar",
+    "gameCoverPic": "https://cdn.discordapp.com/emojis/1294625024795480157.png?v=1",
+    "typeId": 1062,
+    "isNewEngine": 1,
+    "gameMode": 0,
+    "version": 1,
+    "resVersion": 1,
+    "onlineNumber": 0,
+    "visitorEnter": 0,
+    "praiseNumber": 0,
+    "gameTypes": [
+      "Action"
+    ]
+  }
+]
