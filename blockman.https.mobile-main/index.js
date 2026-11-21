@@ -9,6 +9,7 @@ const gamesRouter = require('./route/games');
 
 const decorationRouter = require('./route/decoration');
 const mailboxRouter = require('./route/mailbox');
+const shopRouter = require('./route/shop');
 
 const databaseConfig = require('./config/database');
 
@@ -79,6 +80,9 @@ app.get('/game/api/v1/game/revision/list/by/condition', ok(page));
 // List<Game> (vacías por ahora; los minijuegos van después)
 app.get('/game/api/v1/game/revision/list/recommend', ok([]));
 app.get('/game/api/v1/games/playlist/recently', ok([]));
+
+// Tienda (skins/decoraciones): no depende de la base por ahora
+app.use('/shop', shopRouter);
 
 // ---------------------------------------------------------------
 
