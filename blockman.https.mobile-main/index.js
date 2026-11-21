@@ -12,7 +12,7 @@ const mailboxRouter = require('./route/mailbox');
 const shopRouter = require('./route/shop');
 const lobbyRouter = require('./route/lobby');
 
-const gamesJson = require('./config/games'); // NUEVO
+const gamesJson = require('./config/games');
 
 const databaseConfig = require('./config/database');
 
@@ -81,7 +81,7 @@ app.get('/decoration/api/v1/new/decorations/check/resource', ok({}));
 app.get('/friend/api/v1/friends/follow', ok(page));
 app.get('/msg/api/v1/msg/group/chat/list', ok(page));
 
-// NUEVO: lista de minijuegos (la app usa estas rutas para el launcher)
+// Lista de minijuegos (la app usa estas rutas para el launcher)
 const gamesPage = (req, res) => {
   const pageNo = parseInt(req.query.pageNo) || 0;
   const data = pageNo === 0 ? gamesJson : [];
@@ -100,6 +100,13 @@ const gamesPage = (req, res) => {
 app.get('/game/api/v1/game/revision/list/more', gamesPage);
 app.get('/game/api/v1/game/revision/list/by/condition', gamesPage);
 app.get('/game/api/v1/game/revision/list/recommend', ok(gamesJson));
+
+// NUEVO: categorias del launcher (GameRankingInfo)
+app.get('/game/api/v1/category/list/by/language', ok([
+  { typeId: 0, typeName: 'All', sortType: 'all', iconUrl: '', iconResId: 0 },
+  { typeId: 1, typeName: 'Action', sortType: 'action', iconUrl: '', iconResId: 0 },
+  { typeId: 2, typeName: 'PvP', sortType: 'pvp', iconUrl: '', iconResId: 0 },
+]));
 
 // Historial de juegos jugados: vacio a proposito
 app.get('/game/api/v1/games/playlist/recently', ok([]));
