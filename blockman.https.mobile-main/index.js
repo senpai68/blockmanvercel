@@ -98,10 +98,30 @@ const gamesPage = (req, res) => {
   });
 };
 app.get('/game/api/v1/game/revision/list/more', gamesPage);
-app.get('/game/api/v1/game/revision/list/by/condition', gamesPage);
+
+// CAMBIADO: by/condition devuelve TypePageData: { typeId, pageInfo: { ...pagina } }
+app.get('/game/api/v1/game/revision/list/by/condition', (req, res) => {
+  const pageNo = parseInt(req.query.pageNo) || 0;
+  const typeId = parseInt(req.query.filterTypeId) || 0;
+  res.status(200).json({
+    code: 1,
+    message: 'SUCCESS',
+    data: {
+      typeId,
+      pageInfo: {
+        pageNo,
+        pageSize: gamesJson.length,
+        totalPage: 1,
+        totalSize: gamesJson.length,
+        data: pageNo === 0 ? gamesJson : [],
+      },
+    },
+  });
+});
+
 app.get('/game/api/v1/game/revision/list/recommend', ok(gamesJson));
 
-// NUEVO: categorias del launcher (GameRankingInfo)
+// Categorias del launcher (GameRankingInfo)
 app.get('/game/api/v1/category/list/by/language', ok([
   { typeId: 0, typeName: 'All', sortType: 'all', iconUrl: '', iconResId: 0 },
   { typeId: 1, typeName: 'Action', sortType: 'action', iconUrl: '', iconResId: 0 },
