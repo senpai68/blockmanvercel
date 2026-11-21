@@ -10,6 +10,7 @@ const gamesRouter = require('./route/games');
 const decorationRouter = require('./route/decoration');
 const mailboxRouter = require('./route/mailbox');
 const shopRouter = require('./route/shop');
+const lobbyRouter = require('./route/lobby'); // NUEVO
 
 const databaseConfig = require('./config/database');
 
@@ -47,6 +48,9 @@ function connectDB() {
 
 app.use(express.json());
 
+// NUEVO: portadas locales (/static/games-images/...)
+app.use('/static', express.static(path.join(__dirname, 'static')));
+
 // ---------------------------------------------------------------
 // RESPUESTAS FIJAS con el tipo EXACTO que espera el cliente 1.15.2
 // (van antes del middleware de MongoDB: no dependen de la base)
@@ -83,6 +87,11 @@ app.get('/game/api/v1/games/playlist/recently', ok([]));
 
 // Tienda (skins/decoraciones): no depende de la base por ahora
 app.use('/shop', shopRouter);
+
+// NUEVO: auth y dispatch de minijuegos (no dependen de la base).
+// Debe ir montado en '/' porque sus rutas incluyen el prefijo completo
+// (/game/api/v2/game/auth, /v1/dispatch, ...).
+app.use('/', lobbyRouter);
 
 // ---------------------------------------------------------------
 
