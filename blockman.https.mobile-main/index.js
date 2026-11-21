@@ -52,6 +52,8 @@ app.use(express.json());
 
 // Portadas locales (/static/games-images/...)
 app.use('/static', express.static(path.join(__dirname, 'static')));
+// Archivos que no existen en /static: 404 real (antes caian al comodin con 200)
+app.use('/static', (req, res) => res.status(404).end());
 
 // ---------------------------------------------------------------
 // RESPUESTAS FIJAS con el tipo EXACTO que espera el cliente 1.15.2
