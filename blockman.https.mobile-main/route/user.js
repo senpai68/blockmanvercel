@@ -22,11 +22,20 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
-// Busca al usuario y, si no existe en la base, lo crea vacío
+// Un userId es valido si existe y no es "0" (el cliente manda 0 cuando no tiene sesion)
+function isValidId(id) {
+    return id !== undefined && id !== null && String(id).trim() !== '' && String(id).trim() !== '0';
+}
+
+// Busca al usuario y, si no existe en la base, lo crea vacio.
+// Devuelve null si el userId no es valido (por ejemplo 0): ese usuario no existe.
 async function getOrCreateUser(userId) {
-    let user = await User.findOne({ userId });
+    if (!isValidId(userId)) return null;
+    const id = String(userId).trim();
+
+    let user = await User.findOne({ userId: id });
     if (!user) {
-        user = new User({ userId });
+        user = new User({ userId: id });
         await user.save();
     }
     return user;
@@ -37,13 +46,17 @@ function serverError(res, route, e) {
     return res.status(500).json({ code: -1, message: 'Server error', data: null });
 }
 
+function badParams(res) {
+    return res.status(400).json({ code: 6, message: 'Bad request : Params error please fill them', data: null });
+}
+
 router.post('/api/v1/app/set-password', async (req, res) => {
     try {
         const { password } = req.body;
         const userId = req.headers.userid;
 
-        if (!userId) {
-            return res.status(400).json({ code: 6, message: 'Bad request : Params error please fill them', data: null });
+        if (!isValidId(userId)) {
+            return badParams(res);
         }
 
         const user = await getOrCreateUser(userId);
@@ -70,13 +83,18 @@ router.post('/api/v1/app/renew', async (req, res) => {
     }
 });
 
-// NUEVA: el cliente 1.15.2 la pide al arrancar
+// El cliente 1.15.2 la pide al arrancar. Tiene que devolver el userId de la sesion
+// guardada; si no, el cliente se queda con userId = 0.
 router.get('/api/v1/app/auth-token', (req, res) => {
-    res.status(200).json({
-        code: 1,
-        message: 'SUCCESS',
-        data: { accessToken: 'Not implemented' }
-    });
+    const userId = req.headers.userid || req.query.userId || req.query.userid;
+    console.log('AUTH-TOKEN userid =', userId, '| headers:', Object.keys(req.headers).join(','));
+
+    const data = { accessToken: 'Not implemented' };
+    if (isValidId(userId)) {
+        data.userId = String(userId).trim();
+    }
+
+    res.status(200).json({ code: 1, message: 'SUCCESS', data });
 });
 
 // NUEVA: el cliente 1.15.2 la pide al arrancar
@@ -93,14 +111,14 @@ router.post('/api/v1/user/register', async (req, res) => {
         const { nickName, sex } = req.body;
         const userId = req.headers.userid;
 
-        if (!nickName || !userId) {
-            return res.status(400).json({ code: 6, message: 'Bad request : Params error please fill them', data: null });
+        if (!nickName || !isValidId(userId)) {
+            return badParams(res);
         }
 
         const user = await getOrCreateUser(userId);
 
         const existingUser = await User.findOne({ nickname: nickName });
-        if (existingUser && existingUser.userId !== userId) {
+        if (existingUser && existingUser.userId !== String(userId).trim()) {
             return res.status(400).json({ code: 7, message: 'Nickname already exists, choose another nickname', data: null });
         }
 
@@ -116,7 +134,7 @@ router.post('/api/v1/user/register', async (req, res) => {
         await user.save();
 
         const responseData = {
-            userId: userId,
+            userId: user.userId,
             nickName: user.nickname,
             sex: user.sex,
             picUrl: user.picUrl,
@@ -141,7 +159,12 @@ router.post('/api/v1/user/details/info', async (req, res) => {
         const userId = req.headers['userid'];
 
         if (!userId) {
-            return res.status(400).json({ code: 6, message: 'Bad request : Params error please fill them', data: null });
+            return badParams(res);
+        }
+
+        // userId 0 = sin sesion: ese usuario no existe, no se crea nada en la base
+        if (!isValidId(userId)) {
+            return res.status(200).json({ code: 102, message: 'User ID not found.', data: null });
         }
 
         const user = await getOrCreateUser(userId);
@@ -172,16 +195,27 @@ router.post('/api/v1/app/login', async (req, res) => {
         const { uid, password } = req.body;
 
         if (!uid || !password) {
-            return res.status(400).json({ code: 6, message: 'Bad request : Params error please fill them', data: null });
+            return badParams(res);
         }
 
-        let user = await User.findOne({ userId: uid });
+        // El cliente puede mandar el uid como numero o como texto
+        const uidStr = String(uid).trim();
 
-        // Si no está en la base, mirar account.json y crearlo
+        if (!isValidId(uidStr)) {
+            return res.status(200).json({
+                code: 102,
+                message: 'User ID or username not found.',
+                data: null
+            });
+        }
+
+        let user = await User.findOne({ userId: uidStr });
+
+        // Si no esta en la base, mirar account.json y crearlo
         if (!user) {
-            const acc = Object.values(accountJson).find(a => a.userId === uid);
+            const acc = Object.values(accountJson).find(a => String(a.userId) === uidStr);
             if (acc) {
-                user = new User({ userId: acc.userId, password: acc.password });
+                user = new User({ userId: String(acc.userId), password: acc.password });
                 await user.save();
             }
         }
