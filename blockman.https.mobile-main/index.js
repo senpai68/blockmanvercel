@@ -10,7 +10,9 @@ const gamesRouter = require('./route/games');
 const decorationRouter = require('./route/decoration');
 const mailboxRouter = require('./route/mailbox');
 const shopRouter = require('./route/shop');
-const lobbyRouter = require('./route/lobby'); // NUEVO
+const lobbyRouter = require('./route/lobby');
+
+const gamesJson = require('./config/games'); // NUEVO
 
 const databaseConfig = require('./config/database');
 
@@ -48,7 +50,7 @@ function connectDB() {
 
 app.use(express.json());
 
-// NUEVO: portadas locales (/static/games-images/...)
+// Portadas locales (/static/games-images/...)
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
 // ---------------------------------------------------------------
@@ -78,18 +80,35 @@ app.get('/decoration/api/v1/new/decorations/check/resource', ok({}));
 // PageData (objeto paginado)
 app.get('/friend/api/v1/friends/follow', ok(page));
 app.get('/msg/api/v1/msg/group/chat/list', ok(page));
-app.get('/game/api/v1/game/revision/list/more', ok(page));
-app.get('/game/api/v1/game/revision/list/by/condition', ok(page));
 
-// List<Game> (vacías por ahora; los minijuegos van después)
-app.get('/game/api/v1/game/revision/list/recommend', ok([]));
+// NUEVO: lista de minijuegos (la app usa estas rutas para el launcher)
+const gamesPage = (req, res) => {
+  const pageNo = parseInt(req.query.pageNo) || 0;
+  const data = pageNo === 0 ? gamesJson : [];
+  res.status(200).json({
+    code: 1,
+    message: 'SUCCESS',
+    data: {
+      pageNo,
+      pageSize: gamesJson.length,
+      totalPage: 1,
+      totalSize: gamesJson.length,
+      data,
+    },
+  });
+};
+app.get('/game/api/v1/game/revision/list/more', gamesPage);
+app.get('/game/api/v1/game/revision/list/by/condition', gamesPage);
+app.get('/game/api/v1/game/revision/list/recommend', ok(gamesJson));
+
+// Historial de juegos jugados: vacio a proposito
 app.get('/game/api/v1/games/playlist/recently', ok([]));
 
 // Tienda (skins/decoraciones): no depende de la base por ahora
 app.use('/shop', shopRouter);
 
-// NUEVO: auth y dispatch de minijuegos (no dependen de la base).
-// Debe ir montado en '/' porque sus rutas incluyen el prefijo completo
+// Auth y dispatch de minijuegos (no dependen de la base).
+// Montado en '/' porque sus rutas incluyen el prefijo completo
 // (/game/api/v2/game/auth, /v1/dispatch, ...).
 app.use('/', lobbyRouter);
 
