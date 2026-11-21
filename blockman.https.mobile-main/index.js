@@ -131,6 +131,47 @@ app.get('/game/api/v1/category/list/by/language', ok([
 // Historial de juegos jugados: vacio a proposito
 app.get('/game/api/v1/games/playlist/recently', ok([]));
 
+// Detalle de juego (pantalla al tocar un juego)
+app.get('/game/api/v2/games/:gameId', (req, res) => {
+  const id = req.params.gameId;
+  const found = gamesJson.find((x) => x.gameId === id);
+  const num = parseInt(id.replace(/\D/g, ''), 10) || 0;
+
+  const base = {
+    gameId: id,
+    gameName: id,
+    gameTitle: id,
+    gameCoverPic: '/static/games-images/placeholder.png',
+    typeId: num,
+    isNewEngine: 1,
+    gameMode: 0,
+    version: 1,
+    resVersion: 1,
+    onlineNumber: 0,
+    visitorEnter: 0,
+    praiseNumber: 0,
+    isPay: 0,
+    isOpenParty: 0,
+    isRankOnline: 0,
+    isShopOnline: 0,
+    appreciate: false,
+    gameDetail: '',
+    bannerPic: [],
+    gameBannerVideoInfos: [],
+    realPlayGameList: [],
+    gameTypes: ['Action'],
+  };
+
+  console.log('GAME DETAIL:', id, found ? 'encontrado' : 'por defecto');
+  res.status(200).json({
+    code: 1,
+    message: 'SUCCESS',
+    data: { ...base, ...(found || {}) },
+  });
+});
+
+app.get('/game/api/v1/games/:gameId/appreciation', ok(false));
+
 // Tienda (skins/decoraciones): no depende de la base por ahora
 app.use('/shop', shopRouter);
 
