@@ -136,23 +136,6 @@
     ]
   },
   {
-    "gameId": "g1012",
-    "gameName": "SnowBattle",
-    "gameTitle": "SnowBattle",
-    "gameCoverPic": "/static/games-images/placeholder.png",
-    "typeId": 1012,
-    "isNewEngine": 1,
-    "gameMode": 0,
-    "version": 1,
-    "resVersion": 1,
-    "onlineNumber": 0,
-    "visitorEnter": 0,
-    "praiseNumber": 0,
-    "gameTypes": [
-      "Action"
-    ]
-  },
-  {
     "gameId": "g1013",
     "gameName": "ZombieInfecting",
     "gameTitle": "Zombie Infecting",
