@@ -10,12 +10,12 @@ const catalog = {
   6: require('../config/decoration/6'),
   7: require('../config/decoration/7'),
 };
+const all = Object.values(catalog).flat();
 
 const ok = (data) => ({ code: 1, message: 'SUCCESS', data });
 
-// Convierte un item del catálogo al formato ShopDecorationInfo que lee la app.
-// Se conservan los campos originales y se rellenan los que falten.
-function toShop(item, typeId, idx) {
+// Formato ShopDecorationInfo. Los valores de la prenda mandan sobre los defaults.
+function toShop(item, idx) {
   return {
     activityFlag: '',
     buySuccess: false,
@@ -35,21 +35,22 @@ function toShop(item, typeId, idx) {
     quantity: 1,
     releaseTime: 0,
     remainingDays: 0,
-    resourceId: String(item.id),
     sex: 0,
     suitId: 0,
     suitPrice: 0,
     tag: [],
     ...item,
-    typeId,
+    resourceId: String(item.resourceId != null ? item.resourceId : item.id),
   };
 }
 
 function shopList(req, res) {
-  const typeId = Number(req.params.typeId);
-  const src = catalog[typeId] || [];
-  console.log('SHOP typeId =', typeId, 'items =', src.length);
-  res.status(200).json(ok(src.map((it, i) => toShop(it, typeId, i))));
+  const t = Number(req.params.typeId);
+  // 1) por typeId real de la prenda; 2) respaldo: número de catálogo
+  let src = all.filter((i) => Number(i.typeId) === t);
+  if (src.length === 0) src = catalog[t] || [];
+  console.log('SHOP typeId =', t, 'items =', src.length);
+  res.status(200).json(ok(src.map((it, i) => toShop(it, i))));
 }
 
 router.get('/api/:version/new/shop/decorations/:typeId', shopList);
