@@ -1,12 +1,36 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const router = express.Router();
 const MAPS = require('../config/maps.json');
 
 const ok = (data) => ({ code: 1, message: 'SUCCESS', data });
 const base = (req) => 'https://' + req.headers.host;
-const GAME_ADDR = process.env.GAME_ADDR || '127.0.0.1:19130';
 
-// Registro de lo que pide el cliente (Vercel > Logs, buscar LOBBY)
+// ---------------------------------------------------------------
+// MULTIPLAYER: direccion del servidor del motor (TCP/UDP, NO Vercel)
+//   GAME_ADDR  = "IP:puerto" por defecto para todos los juegos
+//   GAME_ADDRS = JSON por juego, ej: {"g1008":"1.2.3.4:19130","g1002":"1.2.3.4:19131"}
+// Se configuran en Vercel > Settings > Environment Variables.
+// ---------------------------------------------------------------
+const GAME_ADDR = process.env.GAME_ADDR || '127.0.0.1:19130';
+let GAME_ADDRS = {};
+try { GAME_ADDRS = JSON.parse(process.env.GAME_ADDRS || '{}'); } catch (e) {
+  console.log('GAME_ADDRS invalido (debe ser JSON):', e.message);
+}
+const addrFor = (key) => GAME_ADDRS[key] || GAME_ADDR;
+
+// ---------------------------------------------------------------
+// MAPAS: zips en static/game-res/<gameId>.zip  (el nombre DEBE ser <gameId>.zip)
+// Sube el numero de un juego cuando cambies su zip: el cliente lo vuelve a bajar.
+// ---------------------------------------------------------------
+const RES_DIR = path.join(__dirname, '..', 'static', 'game-res');
+const RES_VERSION = { g1008: 1 };
+const hasZip = (key) => fs.existsSync(path.join(RES_DIR, key + '.zip'));
+const zipUrl = (req, key) => base(req) + '/static/game-res/' + key + '.zip';
+const resVer = (key) => RES_VERSION[key] || 1;
+
+// Registro de lo que pide el cliente (Vercel > Logs, buscar LOBBY / GAME-RES)
 router.use((req, res, next) => {
   console.log('LOBBY', req.method, req.originalUrl,
     'query=', JSON.stringify(req.query || {}),
@@ -21,13 +45,12 @@ const gameKey = (v) => {
   return s.startsWith('g') ? s : 'g' + s;
 };
 
-// MiniGameToken (campos confirmados en el smali):
-// dispUrl, downloadUrl, mapName (String), region (int), requestId (Map),
-// signature (String), timestamp (long), token (String)
+// MiniGameToken: dispUrl, downloadUrl, mapName, region(int), requestId(Map),
+// signature, timestamp(long), token
 function tokenFor(req, key) {
   return {
     dispUrl: base(req),
-    downloadUrl: base(req) + '/v1/game-map',
+    downloadUrl: hasZip(key) ? zipUrl(req, key) : '',
     mapName: MAPS[key] || '',
     region: 0,
     requestId: {},
@@ -44,50 +67,65 @@ function auth(req, res) {
 router.get('/game/api/v2/game/auth', auth);
 router.get('/game/api/v1/flow/game/auth', auth);
 
-// GameResInfo (campos confirmados): durl (String), resVersion (int)
-// durl = de donde descarga el cliente los recursos del juego.
-// OJO: ese archivo aun no existe en tu servidor, asi que el siguiente
-// error probable sera la descarga de recursos.
+// GameResInfo: durl (String), resVersion (int)
 router.get('/v1/game-res', (req, res) => {
   const key = gameKey(req.query.gameType);
-  res.status(200).json(ok({
-    durl: base(req) + '/static/game-res/' + key + '.zip',
-    resVersion: 1,
-  }));
+  const zip = hasZip(key);
+  console.log('GAME-RES', key,
+    'engine=', req.query.engineVersion,
+    'resVersion local=', req.query.resVersion,
+    'zip=', zip);
+  if (!zip) return res.status(200).json(ok({}));   // sin zip: no inventar URL (daria 404)
+  res.status(200).json(ok({ durl: zipUrl(req, key), resVersion: resVer(key) }));
 });
 
-// Dispatch (campos confirmados): chatRoomId, code(int), dispUrl, gAddr,
-// gameType, mapId, mapName, mapUrl, name, region (String), requestIds (Map),
-// resVersion (int), signature, timestamp (long)
-// El body que manda el cliente queda registrado arriba (body=).
+// Dispatch: chatRoomId, code, dispUrl, gAddr, gameType, mapId, mapName, mapUrl,
+// name, region(String), requestIds(Map), resVersion, signature, timestamp
+// gAddr = servidor multijugador al que el cliente se conecta tras descargar el mapa.
 router.post('/v1/dispatch', (req, res) => {
   const b = req.body || {};
   const key = gameKey(b.gameType || b.typeId || b.gameId || req.query.gameType);
   const mapName = MAPS[key] || '';
+  const addr = addrFor(key);
+  console.log('DISPATCH', key, 'gAddr=', addr);
   res.status(200).json(ok({
     chatRoomId: '',
     code: 1,
     dispUrl: base(req),
-    gAddr: GAME_ADDR,
+    gAddr: addr,
     gameType: key,
     mapId: mapName.split('/').pop() || '',
     mapName,
-    mapUrl: base(req) + '/v1/game-map?mapName=' + encodeURIComponent(mapName) + '&gameType=' + key,
+    mapUrl: hasZip(key) ? zipUrl(req, key) : '',
     name: key,
     region: '0',
     requestIds: {},
-    resVersion: 1,
+    resVersion: resVer(key),
     signature: '',
     timestamp: Date.now(),
   }));
 });
 
-// game-map devuelve MiniGameToken (confirmado en IGameApi)
+// game-map devuelve MiniGameToken
 router.get('/v1/game-map', (req, res) => {
   const key = gameKey(req.query.gameType);
   const t = tokenFor(req, key);
   if (req.query.mapName) t.mapName = String(req.query.mapName);
   res.status(200).json(ok(t));
+});
+
+// Diagnostico: abre https://TU-DOMINIO/v1/maps-status en el navegador
+router.get('/v1/maps-status', (req, res) => {
+  let files = [];
+  try { files = fs.readdirSync(RES_DIR); } catch (e) { files = ['ERROR: ' + e.message]; }
+  res.status(200).json({
+    resDir: RES_DIR,
+    zips: files,
+    resVersions: RES_VERSION,
+    gAddrDefault: GAME_ADDR,
+    gAddrPerGame: GAME_ADDRS,
+    gAddrIsLocal: /^(127\.|localhost|0\.0\.0\.0)/.test(GAME_ADDR),
+  });
 });
 
 module.exports = router;
