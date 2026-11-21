@@ -13,7 +13,7 @@ const base = (req) => 'https://' + req.headers.host;
 //   GAME_ADDRS = JSON por juego, ej: {"g1008":"1.2.3.4:19130","g1002":"1.2.3.4:19131"}
 // Se configuran en Vercel > Settings > Environment Variables.
 // ---------------------------------------------------------------
-const GAME_ADDR = process.env.GAME_ADDR || '127.0.0.1:19130';
+const GAME_ADDR = process.env.GAME_ADDR || '';
 let GAME_ADDRS = {};
 try { GAME_ADDRS = JSON.parse(process.env.GAME_ADDRS || '{}'); } catch (e) {
   console.log('GAME_ADDRS invalido (debe ser JSON):', e.message);
@@ -26,8 +26,16 @@ const addrFor = (key) => GAME_ADDRS[key] || GAME_ADDR;
 // ---------------------------------------------------------------
 const RES_DIR = path.join(__dirname, '..', 'static', 'game-res');
 const RES_VERSION = { g1008: 1 };
-const hasZip = (key) => fs.existsSync(path.join(RES_DIR, key + '.zip'));
-const zipUrl = (req, key) => base(req) + '/static/game-res/' + key + '.zip';
+// Si defines GAME_RES_BASE (ej. https://mi-hosting.com/game-res) los zips se sirven desde ahi
+// y NO desde Vercel (Vercel limita las respuestas de funciones a 4.5 MB).
+// Sin GAME_RES_BASE funciona como antes (static/game-res/).
+const GAME_RES_BASE = (process.env.GAME_RES_BASE || '').replace(/\/+$/, '');
+const hasZip = (key) => GAME_RES_BASE
+  ? !!MAPS[key]
+  : fs.existsSync(path.join(RES_DIR, key + '.zip'));
+const zipUrl = (req, key) => GAME_RES_BASE
+  ? GAME_RES_BASE + '/' + key + '.zip'
+  : base(req) + '/static/game-res/' + key + '.zip';
 const resVer = (key) => RES_VERSION[key] || 1;
 
 // Registro de lo que pide el cliente (Vercel > Logs, buscar LOBBY / GAME-RES)
@@ -87,7 +95,8 @@ router.post('/v1/dispatch', (req, res) => {
   const key = gameKey(b.gameType || b.typeId || b.gameId || req.query.gameType);
   const mapName = MAPS[key] || '';
   const addr = addrFor(key);
-  console.log('DISPATCH', key, 'gAddr=', addr);
+  if (!addr) console.log('DISPATCH ERROR: falta GAME_ADDR (IP:puerto del servidor del motor)');
+  console.log('DISPATCH', key, 'gAddr=', addr || '(vacio)');
   res.status(200).json(ok({
     chatRoomId: '',
     code: 1,
@@ -119,11 +128,13 @@ router.get('/v1/maps-status', (req, res) => {
   let files = [];
   try { files = fs.readdirSync(RES_DIR); } catch (e) { files = ['ERROR: ' + e.message]; }
   res.status(200).json({
+    gameResBase: GAME_RES_BASE || '(no definido: se usa static/game-res)',
     resDir: RES_DIR,
     zips: files,
     resVersions: RES_VERSION,
     gAddrDefault: GAME_ADDR,
     gAddrPerGame: GAME_ADDRS,
+    gAddrDefinido: !!GAME_ADDR,
     gAddrIsLocal: /^(127\.|localhost|0\.0\.0\.0)/.test(GAME_ADDR),
   });
 });
