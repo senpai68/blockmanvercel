@@ -1,14 +1,9 @@
 const express = require('express');
-const path = require('path');
 const router = express.Router();
 
 const gamesJson = require('../config/games');
 const announcement = require('../config/announcement');
 const stopAnnouncementJson = require('../config/stop-announcement');
-
-const app = express();
-
-app.use('/static', express.static(path.join(__dirname, 'static')));
 
 router.get('/api/v1/games/announcement/info', (req, res) => {
     res.status(200).json({ code: 1, message: 'SUCCESS', data: announcement });
@@ -41,9 +36,9 @@ router.get('/api/v1/games', async (req, res) => {
             message: 'SUCCESS',
             data: {
                 pageNo,
-                pageSize,
-                totalPage: 0,
-                totalSize: 0,
+                pageSize: gamesJson.length,
+                totalPage: 1,
+                totalSize: gamesJson.length,
                 data: gamesJson,
                 other: null
             }
